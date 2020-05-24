@@ -2,6 +2,7 @@ package com.lbx.girl.controller;
 
 import com.lbx.girl.entity.Girl;
 import com.lbx.girl.entity.Result;
+import com.lbx.girl.exception.GirlException;
 import com.lbx.girl.repository.GirlRepository;
 import com.lbx.girl.service.GirlService;
 import com.lbx.girl.utils.ResultUtil;
@@ -42,13 +43,11 @@ public class GirlController {
      * */
     @PostMapping("/girl")
     public Result<Girl> girlAdd(@Valid Girl girl, BindingResult result) {
-        if (result.hasErrors()) {
-            return ResultUtil.error(result.getFieldError().getDefaultMessage());
-
+        if (result instanceof GirlException) {
+            return ResultUtil.error(((GirlException) result).getMessage(), ((GirlException) result).getCode());
+        }else {
+            return ResultUtil.error("未知异常", -5);
         }
-        girl.setAge(girl.getAge());
-        girl.setCupSize(girl.getCupSize());
-        return ResultUtil.success(repository.save(girl));
     }
 
     /*

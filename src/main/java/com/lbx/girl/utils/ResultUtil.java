@@ -8,24 +8,24 @@ import com.lbx.girl.entity.Result;
  * NOTE:
  */
 public class ResultUtil {
-    public static Result success(Object o) {
+    public static Result success(Object o,String msg,Integer code) {
         Result<Object> result = new Result<>();
-        result.setCode(200);
-        result.setMsg("OK");
+        result.setCode(code);
+        result.setMsg(msg);
         result.setData(o);
         return result;
     }
 
-    public static Result success() {
+    public static Result success(String msg,Integer code) {
         Result<Object> result = new Result<>();
-        result.setCode(200);
-        result.setMsg("OK");
+        result.setCode(code);
+        result.setMsg(msg);
         return result;
     }
 
-    public static Result error(String msg) {
+    public static Result error(String msg,Integer code) {
         Result<Object> result = new Result<>();
-        result.setCode(404);
+        result.setCode(code);
         result.setMsg(msg);
         return result;
     }

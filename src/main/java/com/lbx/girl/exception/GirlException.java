@@ -1,5 +1,8 @@
 package com.lbx.girl.exception;
 
+import com.lbx.girl.enums.ResultEnums;
+import org.aspectj.apache.bcel.classfile.Code;
+
 /**
  * USER :lvbingxing
  * TIME :Created in 2020/5/24 14:25
@@ -8,9 +11,9 @@ package com.lbx.girl.exception;
 public class GirlException extends RuntimeException {
     private Integer code;
 
-    public GirlException(String message, Integer code) {
-        super(message);
-        this.code = code;
+    public GirlException(ResultEnums resultEnums) {
+        super(resultEnums.getMsg());
+        this.code = resultEnums.getCode();
     }
 
     public Integer getCode() {

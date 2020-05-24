@@ -1,6 +1,7 @@
 package com.lbx.girl.handle;
 
 import com.lbx.girl.entity.Result;
+import com.lbx.girl.enums.ResultEnums;
 import com.lbx.girl.exception.GirlException;
 import com.lbx.girl.utils.ResultUtil;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,6 +18,11 @@ public class ExceptionHandle {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Result girlHandle(Exception e) {
-        return e instanceof GirlException ? ResultUtil.error(e.getMessage()) : ResultUtil.error("未知异常");
+        if (e instanceof GirlException) {
+            GirlException exception = (GirlException) e;
+            return ResultUtil.error(exception.getMessage(), exception.getCode());
+        }else {
+            return ResultUtil.error(e.getMessage(), -1);
+        }
     }
 }
