@@ -59,7 +59,13 @@ public class GirlController {
         return repository.findById(id);
     }
 
-
+    /*
+    * 某个girl的age是否满足条件
+    * 此处使用捕获异常的方式 实现
+    * 1.自定义异常类 GirlException
+    * 2.根据给定条件抛出GirlException异常
+    * 3.编写捕获类 捕获自定义异常，并包装成 最外层返回
+    * */
     @GetMapping("/ageIf/{id}")
     public void ageIf(@PathVariable("id") Integer id) throws Exception {
         girlService.age_if(id);
